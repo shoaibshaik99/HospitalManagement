@@ -43,5 +43,19 @@ namespace HospitalManagement.Controllers
             return View(doctors);
         }
 
+        [HttpGet]
+        [Route("GetById/{doctorId}")]
+        public IActionResult GetDoctorById(int doctorId)
+        {
+            DoctorModel doctor = doctorBusiness.GetDoctorById(doctorId);
+            if (doctor == null)
+            {
+                return NotFound();
+            }
+            return View(doctor);
+        }
+
+
+
     }
 }

@@ -108,6 +108,50 @@ VALUES
     10 -- Years_Of_Experience: Sample years of experience
 );
 
+CREATE PROCEDURE usp_GetAllDoctors
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    SELECT 
+        DoctorId,
+        IsTrash,
+        FirstName,
+        LastName,
+        ContactNumber,
+        Email,
+        ImageLink,
+        DOB,
+        Age,
+        Gender,
+        Contact_Address AS ContactAddress,
+        Qualification,
+        Specialization,
+        Years_Of_Experience AS YearsOfExperience,
+        CreatedAt,
+        UpdatedAt
+    FROM 
+        Hospital.Doctors;
+END;
+
+Exec usp_GetAllDoctors
+
+CREATE PROCEDURE usp_GetDoctorById
+    @DoctorId INT
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    SELECT 
+        *
+    FROM 
+        Hospital.Doctors
+    WHERE 
+        DoctorId = @DoctorId;
+END;
+
+Exec usp_GetDoctorById 1;
+
 
 
 Drop Table Hospital.Doctors;

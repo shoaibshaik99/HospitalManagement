@@ -12,5 +12,7 @@ namespace BusinessLayer.Interfaces
         public bool CreateProfile(DoctorModel doctorModel);
 
         public List<DoctorModel> GetAllDoctors();
+
+        public DoctorModel GetDoctorById(int doctorId);
     }
 }

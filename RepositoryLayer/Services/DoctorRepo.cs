@@ -101,5 +101,53 @@ namespace RepositoryLayer.Services
             return doctors;
         }
 
+        public DoctorModel GetDoctorById(int doctorId)
+        {
+            DoctorModel doctor = null;
+
+            try
+            {
+                connection.Open();
+                SqlCommand getByIdCommand = new SqlCommand("usp_GetDoctorById", connection);
+                getByIdCommand.CommandType = CommandType.StoredProcedure;
+                getByIdCommand.Parameters.AddWithValue("@DoctorId", doctorId);
+
+                SqlDataReader reader = getByIdCommand.ExecuteReader();
+                if (reader.Read())
+                {
+                    doctor = new DoctorModel
+                    {
+                        DoctorId = Convert.ToInt32(reader["DoctorId"]),
+                        IsTrash = Convert.ToBoolean(reader["IsTrash"]),
+                        FirstName = reader["FirstName"].ToString(),
+                        LastName = reader["LastName"].ToString(),
+                        ContactNumber = reader["ContactNumber"].ToString(),
+                        Email = reader["Email"].ToString(),
+                        ImageLink = reader["ImageLink"] != DBNull.Value ? reader["ImageLink"].ToString() : null,
+                        DOB = Convert.ToDateTime(reader["DOB"]),
+                        Age = Convert.ToInt32(reader["Age"]),
+                        Gender = reader["Gender"].ToString(),
+                        ContactAddress = reader["Contact_Address"].ToString(),
+                        Qualification = reader["Qualification"].ToString(),
+                        Specialization = reader["Specialization"].ToString(),
+                        YearsOfExperience = Convert.ToInt32(reader["Years_Of_Experience"]),
+                        CreatedAt = Convert.ToDateTime(reader["CreatedAt"]),
+                        UpdatedAt = Convert.ToDateTime(reader["UpdatedAt"])
+                    };
+                }
+                reader.Close();
+            }
+            catch (Exception ex)
+            {
+                //logger.LogError(ex, "An error occurred while fetching doctor details by ID.");
+                throw ex;
+            }
+            finally
+            {
+                connection.Close();
+            }
+
+            return doctor;
+        }
     }
 }

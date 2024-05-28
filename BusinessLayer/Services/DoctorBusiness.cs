@@ -27,5 +27,10 @@ namespace BusinessLayer.Services
         {
             return doctorRepo.GetAllDoctors();
         }
+
+        public DoctorModel GetDoctorById(int doctorId)
+        {
+            return doctorRepo.GetDoctorById(doctorId);
+        }
     }
 }
