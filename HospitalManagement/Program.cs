@@ -1,3 +1,8 @@
+using BusinessLayer.Interfaces;
+using BusinessLayer.Services;
+using RepositoryLayer.Interfaces;
+using RepositoryLayer.Services;
+
 namespace HospitalManagement
 {
     public class Program
@@ -8,6 +13,8 @@ namespace HospitalManagement
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+            builder.Services.AddTransient<IDoctorRepo,DoctorRepo>();
+            builder.Services.AddTransient<IDoctorBusiness, DoctorBusiness>();
 
             var app = builder.Build();
 
