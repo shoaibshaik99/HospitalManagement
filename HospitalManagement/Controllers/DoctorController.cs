@@ -55,6 +55,67 @@ namespace HospitalManagement.Controllers
             return View(doctor);
         }
 
+        [HttpGet]
+        public IActionResult UpdateDoctor(int doctorId)
+        {
+            DoctorModel doctor = doctorBusiness.GetDoctorById(doctorId);
+            if (doctor == null)
+            {
+                return NotFound();
+            }
+            return View(doctor);
+        }
+
+        [HttpPost]
+        public IActionResult UpdateDoctor(int doctorId, DoctorModel doctorModel)
+        {
+            if (doctorId != doctorModel.DoctorId)
+            {
+                return BadRequest();
+            }
+
+            bool isUpdated = doctorBusiness.UpdateDoctor(doctorModel);
+            if (isUpdated)
+            {
+                return RedirectToAction("GetAllDoctors");
+            }
+            else
+            {
+                // Handle update failure
+                //return RedirectToAction("GetAllDoctors");
+                //return View("Index");
+                return BadRequest();
+            }
+
+        }
+
+        [HttpGet]
+        public IActionResult DeleteDoctor(int doctorId)
+        {
+            DoctorModel doctor = doctorBusiness.GetDoctorById(doctorId);
+            if (doctor == null)
+            {
+                return NotFound();
+            }
+            return View(doctor);
+        }
+
+
+        [HttpDelete]
+        [ValidateAntiForgeryToken]
+        public IActionResult Delete(int doctorId)
+        {
+            bool isDeleted = doctorBusiness.DeleteDoctor(doctorId);
+            if (isDeleted)
+            {
+                return RedirectToAction(nameof(GetAllDoctors));
+            }
+            else
+            {
+                // Handle deletion failure+
+                return RedirectToAction(nameof(GetAllDoctors));
+            }
+        }
 
 
     }

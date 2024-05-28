@@ -14,5 +14,9 @@ namespace RepositoryLayer.Interfaces
         public List<DoctorModel> GetAllDoctors();
 
         public DoctorModel GetDoctorById(int doctorId);
+
+        public bool UpdateDoctor(DoctorModel doctorModel);
+
+        public bool DeleteDoctor(int doctorId);
     }
 }

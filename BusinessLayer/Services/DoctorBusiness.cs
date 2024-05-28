@@ -32,5 +32,15 @@ namespace BusinessLayer.Services
         {
             return doctorRepo.GetDoctorById(doctorId);
         }
+
+        public bool UpdateDoctor(DoctorModel doctorModel)
+        {
+            return doctorRepo.UpdateDoctor(doctorModel);
+        }
+
+        public bool DeleteDoctor(int doctorId)
+        {
+            return doctorRepo.DeleteDoctor(doctorId);
+        }
     }
 }

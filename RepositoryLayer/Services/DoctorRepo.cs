@@ -12,12 +12,12 @@ using RepositoryLayer.Interfaces;
 
 namespace RepositoryLayer.Services
 {
-    public class DoctorRepo: IDoctorRepo
+    public class DoctorRepo : IDoctorRepo
     {
         readonly IConfiguration config;
         readonly string connectionString;
         readonly SqlConnection connection = new SqlConnection();
-        
+
         public DoctorRepo(IConfiguration configuration)
         {
             this.config = configuration;
@@ -26,8 +26,8 @@ namespace RepositoryLayer.Services
         }
 
         public bool CreateProfile(DoctorModel doctorModel)
-        {            
-            if (doctorModel != null && connection !=null)
+        {
+            if (doctorModel != null && connection != null)
             {
                 connection.Open();
                 SqlCommand createCommand = new SqlCommand("usp_CreateDoctorProfile", connection);
@@ -149,5 +149,61 @@ namespace RepositoryLayer.Services
 
             return doctor;
         }
+
+        public bool UpdateDoctor(DoctorModel doctorModel)
+        {
+            try
+            {
+                if (doctorModel != null && connection != null)
+                {
+                    connection.Open();
+                    SqlCommand updateCommand = new SqlCommand("usp_UpdateDoctor", connection);
+                    updateCommand.CommandType = CommandType.StoredProcedure;
+
+                    updateCommand.Parameters.AddWithValue("@DoctorId", doctorModel.DoctorId);
+                    updateCommand.Parameters.AddWithValue("@FirstName", doctorModel.FirstName);
+                    updateCommand.Parameters.AddWithValue("@LastName", doctorModel.LastName);
+                    updateCommand.Parameters.AddWithValue("@ContactNumber", doctorModel.ContactNumber);
+                    updateCommand.Parameters.AddWithValue("@Email", doctorModel.Email);
+                    updateCommand.Parameters.AddWithValue("@ImageLink", doctorModel.ImageLink);
+                    updateCommand.Parameters.AddWithValue("@DOB", doctorModel.DOB);
+                    updateCommand.Parameters.AddWithValue("@Gender", doctorModel.Gender);
+                    updateCommand.Parameters.AddWithValue("@Contact_Address", doctorModel.ContactAddress);
+                    updateCommand.Parameters.AddWithValue("@Qualification", doctorModel.Qualification);
+                    updateCommand.Parameters.AddWithValue("@Specialization", doctorModel.Specialization);
+                    updateCommand.Parameters.AddWithValue("@Years_Of_Experience", doctorModel.YearsOfExperience);
+
+                    updateCommand.ExecuteNonQuery();
+
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                //logger.LogError(ex, "An error occurred while fetching doctor details by ID.");
+                throw ex;
+            }
+            finally
+            {
+                connection.Close();
+            }
+
+            return false;
+            }
+
+            public bool DeleteDoctor(int doctorId)
+            {
+                if (connection != null)
+                {
+                    connection.Open();
+                    SqlCommand deleteCommand = new SqlCommand("usp_DeleteDoctor", connection);
+                    deleteCommand.CommandType = CommandType.StoredProcedure;
+                    deleteCommand.Parameters.AddWithValue("@DoctorId", doctorId);
+                    deleteCommand.ExecuteNonQuery();
+                    connection.Close();
+                    return true;
+                }
+                return false;
+            }
+        }
     }
-}
