@@ -10,5 +10,7 @@ namespace BusinessLayer.Interfaces
     public interface IDoctorBusiness
     {
         public bool CreateProfile(DoctorModel doctorModel);
+
+        public List<DoctorModel> GetAllDoctors();
     }
 }

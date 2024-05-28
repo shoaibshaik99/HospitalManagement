@@ -52,17 +52,54 @@ namespace RepositoryLayer.Services
             return false;
         }
 
-        //public IList GetAll()
-        //{
-        //    try
-        //    {
-        //        connection.Open();
+        public List<DoctorModel> GetAllDoctors()
+        {
+            List<DoctorModel> doctors = new List<DoctorModel>();
 
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        throw ex;
-        //    }
-        //}
+            try
+            {
+                connection.Open();
+                SqlCommand getAllCommand = new SqlCommand("usp_GetAllDoctors", connection);
+                getAllCommand.CommandType = CommandType.StoredProcedure;
+
+                SqlDataReader reader = getAllCommand.ExecuteReader();
+                while (reader.Read())
+                {
+                    DoctorModel doctor = new DoctorModel
+                    {
+                        DoctorId = Convert.ToInt32(reader["DoctorId"]),
+                        IsTrash = Convert.ToBoolean(reader["IsTrash"]),
+                        FirstName = reader["FirstName"].ToString(),
+                        LastName = reader["LastName"].ToString(),
+                        ContactNumber = reader["ContactNumber"].ToString(),
+                        Email = reader["Email"].ToString(),
+                        ImageLink = reader["ImageLink"] != DBNull.Value ? reader["ImageLink"].ToString() : null,
+                        DOB = Convert.ToDateTime(reader["DOB"]),
+                        Age = Convert.ToInt32(reader["Age"]),
+                        Gender = reader["Gender"].ToString(),
+                        ContactAddress = reader["ContactAddress"].ToString(),
+                        Qualification = reader["Qualification"].ToString(),
+                        Specialization = reader["Specialization"].ToString(),
+                        YearsOfExperience = Convert.ToInt32(reader["YearsOfExperience"]),
+                        CreatedAt = Convert.ToDateTime(reader["CreatedAt"]),
+                        UpdatedAt = Convert.ToDateTime(reader["UpdatedAt"])
+                    };
+                    doctors.Add(doctor);
+                }
+                reader.Close();
+            }
+            catch (Exception ex)
+            {
+                //logger.LogError(ex, "An error occurred while fetching doctor details.");
+                throw; // Optionally rethrow the exception to propagate it.
+            }
+            finally
+            {
+                connection.Close();
+            }
+
+            return doctors;
+        }
+
     }
 }

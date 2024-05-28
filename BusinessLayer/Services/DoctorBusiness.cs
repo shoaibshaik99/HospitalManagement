@@ -22,5 +22,10 @@ namespace BusinessLayer.Services
         {
             return doctorRepo.CreateProfile(doctorModel);
         }
+
+        public List<DoctorModel> GetAllDoctors()
+        {
+            return doctorRepo.GetAllDoctors();
+        }
     }
 }

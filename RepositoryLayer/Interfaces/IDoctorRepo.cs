@@ -10,5 +10,7 @@ namespace RepositoryLayer.Interfaces
     public interface IDoctorRepo
     {
         public bool CreateProfile(DoctorModel doctorModel);
+
+        public List<DoctorModel> GetAllDoctors();
     }
 }

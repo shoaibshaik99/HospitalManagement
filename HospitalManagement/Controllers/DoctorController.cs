@@ -36,7 +36,12 @@ namespace HospitalManagement.Controllers
             return View("Index");
         }
 
-        //public IActionResult UpdateDoctorProfile() { }
+        [HttpGet]
+        public IActionResult GetAllDoctors()
+        {
+            List<DoctorModel> doctors = doctorBusiness.GetAllDoctors();
+            return View(doctors);
+        }
 
     }
 }
