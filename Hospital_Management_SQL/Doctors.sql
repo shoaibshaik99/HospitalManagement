@@ -28,7 +28,8 @@ CREATE TABLE Hospital.Doctors
     UpdatedAt DATETIME DEFAULT GETDATE()
 );
 
-ALTER PROCEDURE sp_CreateDoctorProfile
+drop procedure sp_CreateDoctorProfile;
+CREATE PROCEDURE usp_CreateDoctorProfile
     @FirstName VARCHAR(50),
     @LastName VARCHAR(50),
     @ContactNumber VARCHAR(15),
@@ -77,7 +78,7 @@ END;
 
 select * from Hospital.Doctors
 
-exec sp_CreateDoctorProfile
+exec usp_CreateDoctorProfile
     'John', -- FirstName: Sample first name
     'Doe', -- LastName: Sample last name
     '+1234567890', -- ContactNumber: Sample contact number
@@ -106,6 +107,7 @@ VALUES
     'Cardiology', -- Specialization: Sample specialization
     10 -- Years_Of_Experience: Sample years of experience
 );
+
 
 
 Drop Table Hospital.Doctors;

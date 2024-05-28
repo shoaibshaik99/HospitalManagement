@@ -30,7 +30,7 @@ namespace RepositoryLayer.Services
             if (doctorModel != null && connection !=null)
             {
                 connection.Open();
-                SqlCommand createCommand = new SqlCommand("sp_CreateDoctorProfile", connection);
+                SqlCommand createCommand = new SqlCommand("usp_CreateDoctorProfile", connection);
                 createCommand.CommandType = CommandType.StoredProcedure;
 
                 createCommand.Parameters.AddWithValue("@FirstName", doctorModel.FirstName);
@@ -52,5 +52,17 @@ namespace RepositoryLayer.Services
             return false;
         }
 
+        //public IList GetAll()
+        //{
+        //    try
+        //    {
+        //        connection.Open();
+
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        throw ex;
+        //    }
+        //}
     }
 }
