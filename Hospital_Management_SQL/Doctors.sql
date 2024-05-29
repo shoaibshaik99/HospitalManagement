@@ -29,6 +29,7 @@ CREATE TABLE Hospital.Doctors
 );
 
 drop procedure sp_CreateDoctorProfile;
+
 CREATE PROCEDURE usp_CreateDoctorProfile
     @FirstName VARCHAR(50),
     @LastName VARCHAR(50),
@@ -108,7 +109,7 @@ VALUES
     10 -- Years_Of_Experience: Sample years of experience
 );
 
-CREATE PROCEDURE usp_GetAllDoctors
+AlTER PROCEDURE usp_GetAllDoctors
 AS
 BEGIN
     SET NOCOUNT ON;
@@ -130,13 +131,13 @@ BEGIN
         Years_Of_Experience AS YearsOfExperience,
         CreatedAt,
         UpdatedAt
-    FROM 
-        Hospital.Doctors;
+    FROM Hospital.Doctors
+    WHERE IsTrash = 0;
 END;
 
 Exec usp_GetAllDoctors
 
-CREATE PROCEDURE usp_GetDoctorById
+ALTER PROCEDURE usp_GetDoctorById
     @DoctorId INT
 AS
 BEGIN
@@ -144,10 +145,8 @@ BEGIN
 
     SELECT 
         *
-    FROM 
-        Hospital.Doctors
-    WHERE 
-        DoctorId = @DoctorId;
+    FROM Hospital.Doctors
+    WHERE DoctorId = @DoctorId AND IsTrash = 0;
 END;
 
 Exec usp_GetDoctorById 1;
@@ -199,6 +198,42 @@ BEGIN
     WHERE
         DoctorId = @DoctorId;
 END;
+
+
+Alter PROCEDURE usp_DeleteDoctor
+    @DoctorId INT
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    UPDATE Hospital.Doctors
+    SET IsTrash = 1
+	WHERE
+        DoctorId = @DoctorId;
+END;
+
+
+--ALTER PROCEDURE usp_GetAllDoctors
+--AS
+--BEGIN
+--    SET NOCOUNT ON;
+
+--    SELECT *
+--    FROM Hospital.Doctors
+--    WHERE IsTrash = 0;
+--END;
+
+--ALTER PROCEDURE usp_GetDoctorById
+--    @DoctorId INT
+--AS
+--BEGIN
+--    SET NOCOUNT ON;
+
+--    SELECT *
+--    FROM Hospital.Doctors
+--    WHERE DoctorId = @DoctorId AND IsTrash = 0;
+--END;
+
 
 
 Drop Table Hospital.Doctors;
