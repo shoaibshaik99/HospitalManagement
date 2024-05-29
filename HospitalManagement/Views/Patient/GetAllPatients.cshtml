@@ -1,10 +1,10 @@
-﻿@model IEnumerable<ModelLayer.Models.DoctorModel>
+﻿@model IEnumerable<ModelLayer.Models.PatientModel>
 
 @{
-    ViewData["Title"] = "GetAllDoctors";
+    ViewData["Title"] = "GetAllPatients";
 }
-<link rel="stylesheet" href="~/css/GetAll.css" asp-append-version="true" />
-<h1>GetAllDoctors</h1>
+
+<h1>GetAllPatients</h1>
 
 <p>
     <a asp-action="Create">Create New</a>
@@ -13,19 +13,19 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.DoctorId)
+                @Html.DisplayNameFor(model => model.Patient_Id)
             </th>
             @* <th>
-                @Html.DisplayNameFor(model => model.IsTrash)
+            @Html.DisplayNameFor(model => model.IsTrash)
             </th> *@
             <th>
-                @Html.DisplayNameFor(model => model.FirstName)
+                @Html.DisplayNameFor(model => model.First_Name)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.LastName)
+                @Html.DisplayNameFor(model => model.Last_Name)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ContactNumber)
+                @Html.DisplayNameFor(model => model.Number)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Email)
@@ -43,16 +43,10 @@
                 @Html.DisplayNameFor(model => model.Gender)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ContactAddress)
+                @Html.DisplayNameFor(model => model.Contact_Address)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Qualification)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Specialization)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.YearsOfExperience)
+                @Html.DisplayNameFor(model => model.Concern)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.CreatedAt)
@@ -68,19 +62,19 @@
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.DoctorId)
+                    @Html.DisplayFor(modelItem => item.Patient_Id)
                 </td>
                 @* <td>
                     @Html.DisplayFor(modelItem => item.IsTrash)
                 </td> *@
                 <td>
-                    @Html.DisplayFor(modelItem => item.FirstName)
+                    @Html.DisplayFor(modelItem => item.First_Name)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.LastName)
+                    @Html.DisplayFor(modelItem => item.Last_Name)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.ContactNumber)
+                    @Html.DisplayFor(modelItem => item.Number)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Email)
@@ -98,16 +92,10 @@
                     @Html.DisplayFor(modelItem => item.Gender)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.ContactAddress)
+                    @Html.DisplayFor(modelItem => item.Contact_Address)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Qualification)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Specialization)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.YearsOfExperience)
+                    @Html.DisplayFor(modelItem => item.Concern)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.CreatedAt)
@@ -116,12 +104,11 @@
                     @Html.DisplayFor(modelItem => item.UpdatedAt)
                 </td>
                 <td>
-                    @Html.ActionLink("Edit", "UpdateDoctor", new { doctorId = item.DoctorId }) |
-                    @Html.ActionLink("Details", "GetDoctorById", new { doctorId = item.DoctorId }) |
-                    @* @Html.ActionLink("Details", "GetDoctorById", "Doctor", new { doctorId = item.DoctorId }, null) *@
-                    @Html.ActionLink("Delete", "DeleteDoctor", new { id = item.DoctorId })
+                    @Html.ActionLink("Edit", "UpdatePatient", new {  id=item.Patient_Id }) |
+                    @Html.ActionLink("Details", "GetPatientById", new {  id=item.Patient_Id  }) |
+                    @Html.ActionLink("Delete", "DeletePatient", new {  id=item.Patient_Id })
                 </td>
             </tr>
-        }   
+        }
     </tbody>
 </table>

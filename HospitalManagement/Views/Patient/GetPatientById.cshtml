@@ -1,45 +1,44 @@
-﻿@model ModelLayer.Models.DoctorModel
+﻿@model ModelLayer.Models.PatientModel
 
 @{
-    ViewData["Title"] = "DeleteDoctor";
+    ViewData["Title"] = "GetPatientById";
 }
 
-<h1>Delete Doctor</h1>
+<h1>GetPatientById</h1>
 
-<h3>Are you sure you want to delete this?</h3>
 <div>
-    <h4>Doctor Details</h4>
+    <h4>PatientModel</h4>
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.DoctorId)
+            @Html.DisplayNameFor(model => model.Patient_Id)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.DoctorId)
+            @Html.DisplayFor(model => model.Patient_Id)
         </dd>
-        <dt class = "col-sm-2">
+        @* <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.IsTrash)
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.IsTrash)
-        </dd>
+        </dd> *@
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.FirstName)
+            @Html.DisplayNameFor(model => model.First_Name)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.FirstName)
+            @Html.DisplayFor(model => model.First_Name)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.LastName)
+            @Html.DisplayNameFor(model => model.Last_Name)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.LastName)
+            @Html.DisplayFor(model => model.Last_Name)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ContactNumber)
+            @Html.DisplayNameFor(model => model.Number)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ContactNumber)
+            @Html.DisplayFor(model => model.Number)
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Email)
@@ -72,30 +71,18 @@
             @Html.DisplayFor(model => model.Gender)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ContactAddress)
+            @Html.DisplayNameFor(model => model.Contact_Address)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ContactAddress)
+            @Html.DisplayFor(model => model.Contact_Address)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Qualification)
+            @Html.DisplayNameFor(model => model.Concern)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Qualification)
+            @Html.DisplayFor(model => model.Concern)
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Specialization)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Specialization)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.YearsOfExperience)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.YearsOfExperience)
-        </dd>
-        <dt class = "col-sm-2">
+        @* <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.CreatedAt)
         </dt>
         <dd class = "col-sm-10">
@@ -106,19 +93,10 @@
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.UpdatedAt)
-        </dd>
+        </dd> *@
     </dl>
-    
-    
-    @* <form asp-action="DeleteDoctor">
-        <!--By Get will be executes when a method attribute isn't specified -->
-        <input type="submit" value="Delete" class="btn btn-danger" /> |
-        <a asp-action="GetAllDoctors">Back to List</a>
-    </form> *@
-   
-    <form asp-action="DeleteDoctor" method="post">
-        <input type="hidden" asp-for="DoctorId" />
-        <input type="submit" value="Delete" class="btn btn-danger" /> |
-        <a asp-action="GetAllDoctors">Back to List</a>
-    </form>
+</div>
+<div>
+    @Html.ActionLink("Edit", "UpdatePatient", new {  id=Model.Patient_Id }) |
+    <a asp-action="GetAllPatients">Back to List</a>
 </div>

@@ -146,7 +146,7 @@ BEGIN
     SELECT 
         *
     FROM Hospital.Doctors
-    WHERE DoctorId = @DoctorId,-- AND IsTrash = 0;
+    WHERE DoctorId = @DoctorId AND IsTrash = 0;
 END;
 
 Exec usp_GetDoctorById 1;
@@ -235,6 +235,8 @@ END;
 --END;
 
 
+    SELECT *
+    FROM Hospital.Doctors
 
 Drop Table Hospital.Doctors;
 Drop Schema Hospital;

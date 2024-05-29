@@ -16,48 +16,53 @@ Create Table Hospital.Patients
                                               END),
 	Gender VARCHAR(10) NOT NULL,
 	Contact_Address varchar(100) not null,
-	Concern varchar(max) not null
+	Concern varchar(max) not null,
+	CreatedAt DATETIME DEFAULT GETDATE(),
+    UpdatedAt DATETIME DEFAULT GETDATE()
 )
 
 --CreatePatient
-CREATE PROCEDURE usp_CreatePatient
+CREATE PROCEDURE usp_CreatePatientProfile
     @First_Name varchar(50),
     @Last_Name varchar(50),
-    @Number bigint,
+    @Number varchar(15),
     @Email varchar(50),
-    @ImageLink varchar(50),
-    @DOB date,
+    @ImageLink varchar(255),
+    @DOB Date,
     @Gender varchar(10),
     @Contact_Address varchar(100),
     @Concern varchar(max)
 AS
 BEGIN
-    INSERT INTO Hospital.Patients (Is_Trash, First_Name, Last_Name, Number, Email, ImageLink, DOB, Gender, Contact_Address, Concern)
-    VALUES (0, @First_Name, @Last_Name, @Number, @Email, @ImageLink, @DOB, @Gender, @Contact_Address, @Concern);
+    SET NOCOUNT ON;
+
+    INSERT INTO Hospital.Patients (First_Name, Last_Name, Number, Email, ImageLink, DOB, Gender, Contact_Address, Concern)
+    VALUES (@First_Name, @Last_Name, @Number, @Email, @ImageLink, @DOB, @Gender, @Contact_Address, @Concern);
 END
 
---GetAlPatients
-CREATE PROCEDURE usp_GetAllPatients
+--GetAllPatients
+Alter PROCEDURE usp_GetAllPatients
 AS
 BEGIN
-    SELECT Patient_Id, First_Name, Last_Name, Number, Email, ImageLink, DOB, Gender, Contact_Address, Concern
-    FROM Hospital.Patients
-    WHERE Is_Trash = 0; -- Only retrieve non-deleted patients
+    SET NOCOUNT ON;
+
+    SELECT * FROM Hospital.Patients WHERE Is_Trash = 0;
 END
 
+
 --GetPatientById
-CREATE PROCEDURE usp_GetPatientById
+Alter PROCEDURE usp_GetPatientById
     @Patient_Id int
 AS
 BEGIN
-    SELECT Patient_Id, First_Name, Last_Name, Number, Email, ImageLink, DOB, Gender, Contact_Address, Concern
+    SELECT Patient_Id, First_Name, Last_Name, Number, Email, ImageLink, DOB, Age, Gender, Contact_Address, Concern
     FROM Hospital.Patients
     WHERE Patient_Id = @Patient_Id
         --AND Is_Trash = 0; -- Ensure the patient is not deleted
 END
 
 --UpdatePatient
-CREATE PROCEDURE usp_UpdatePatient
+Alter PROCEDURE usp_UpdatePatient
     @Patient_Id int,
     @First_Name varchar(50),
     @Last_Name varchar(50),
@@ -79,24 +84,26 @@ BEGIN
         DOB = @DOB,
         Gender = @Gender,
         Contact_Address = @Contact_Address,
-        Concern = @Concern
+        Concern = @Concern,
+		UpdatedAt = GETDATE()
     WHERE Patient_Id = @Patient_Id
         AND Is_Trash = 0; -- Ensure the patient is not deleted
 END
 
 --DeletePatient
-CREATE PROCEDURE usp_DeletePatient
+Alter PROCEDURE usp_DeletePatient
     @Patient_Id int
 AS
 BEGIN
     UPDATE Hospital.Patients
-    SET Is_Trash = 1 -- Soft delete by setting Is_Trash to true
+    SET Is_Trash = 1, -- Soft delete by setting Is_Trash to true
+		UpdatedAt = GETDATE()
     WHERE Patient_Id = @Patient_Id;
 END
 
 --Sample CRUD
 
-EXEC usp_CreatePatient 
+EXEC usp_CreatePatientProfile
     @First_Name = 'John',
     @Last_Name = 'Doe',
     @Number = '1234567890',
@@ -126,5 +133,6 @@ EXEC usp_GetAllPatients;
 
 EXEC usp_GetPatientById @Patient_Id = 1;
 
+select * from Hospital.Patients
 
 --Drop Table Hospital.Patients;

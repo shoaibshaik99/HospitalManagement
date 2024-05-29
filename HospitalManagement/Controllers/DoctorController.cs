@@ -24,7 +24,6 @@ namespace HospitalManagement.Controllers
             return View();
         }
 
-
         [HttpPost]
         public IActionResult CreateProfile(DoctorModel doctorModel)
         {
