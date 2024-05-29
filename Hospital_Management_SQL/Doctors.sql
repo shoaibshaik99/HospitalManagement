@@ -146,7 +146,7 @@ BEGIN
     SELECT 
         *
     FROM Hospital.Doctors
-    WHERE DoctorId = @DoctorId AND IsTrash = 0;
+    WHERE DoctorId = @DoctorId,-- AND IsTrash = 0;
 END;
 
 Exec usp_GetDoctorById 1;
