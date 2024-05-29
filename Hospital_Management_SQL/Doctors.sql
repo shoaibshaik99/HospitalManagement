@@ -152,6 +152,53 @@ END;
 
 Exec usp_GetDoctorById 1;
 
+CREATE PROCEDURE usp_UpdateDoctor
+    @DoctorId INT,
+    @FirstName VARCHAR(50),
+    @LastName VARCHAR(50),
+    @ContactNumber VARCHAR(15),
+    @Email VARCHAR(50),
+    @ImageLink VARCHAR(255),
+    @DOB DATE,
+    @Gender VARCHAR(10),
+    @Contact_Address VARCHAR(100),
+    @Qualification VARCHAR(50),
+    @Specialization VARCHAR(50),
+    @Years_Of_Experience INT
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    UPDATE Hospital.Doctors
+    SET 
+        FirstName = @FirstName,
+        LastName = @LastName,
+        ContactNumber = @ContactNumber,
+        Email = @Email,
+        ImageLink = @ImageLink,
+        DOB = @DOB,
+        Gender = @Gender,
+        Contact_Address = @Contact_Address,
+        Qualification = @Qualification,
+        Specialization = @Specialization,
+        Years_Of_Experience = @Years_Of_Experience,
+        UpdatedAt = GETDATE()
+    WHERE
+        DoctorId = @DoctorId;
+END;
+
+drop proc  usp_UpdateDoctor;
+
+CREATE PROCEDURE usp_DeleteDoctor
+    @DoctorId INT
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    DELETE FROM Hospital.Doctors
+    WHERE
+        DoctorId = @DoctorId;
+END;
 
 
 Drop Table Hospital.Doctors;

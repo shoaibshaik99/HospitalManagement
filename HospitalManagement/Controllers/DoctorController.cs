@@ -44,7 +44,7 @@ namespace HospitalManagement.Controllers
         }
 
         [HttpGet]
-        [Route("GetById/{doctorId}")]
+        [Route("Doctor/GetById/{doctorId}")]
         public IActionResult GetDoctorById(int doctorId)
         {
             DoctorModel doctor = doctorBusiness.GetDoctorById(doctorId);
@@ -81,18 +81,15 @@ namespace HospitalManagement.Controllers
             }
             else
             {
-                // Handle update failure
-                //return RedirectToAction("GetAllDoctors");
-                //return View("Index");
                 return BadRequest();
             }
 
         }
 
         [HttpGet]
-        public IActionResult DeleteDoctor(int doctorId)
+        public IActionResult DeleteDoctor(int id)
         {
-            DoctorModel doctor = doctorBusiness.GetDoctorById(doctorId);
+            DoctorModel doctor = doctorBusiness.GetDoctorById(id);
             if (doctor == null)
             {
                 return NotFound();
@@ -101,19 +98,19 @@ namespace HospitalManagement.Controllers
         }
 
 
-        [HttpDelete]
+        [HttpPost, ActionName("DeleteDoctor")]
         [ValidateAntiForgeryToken]
-        public IActionResult Delete(int doctorId)
+        public IActionResult DeleteConfirmed(int id)
         {
-            bool isDeleted = doctorBusiness.DeleteDoctor(doctorId);
+            bool isDeleted = doctorBusiness.DeleteDoctor(id);
             if (isDeleted)
             {
-                return RedirectToAction(nameof(GetAllDoctors));
+                return RedirectToAction("GetAllDoctors");
             }
             else
             {
-                // Handle deletion failure+
-                return RedirectToAction(nameof(GetAllDoctors));
+                
+                return RedirectToAction("GetAllDoctors");
             }
         }
 
