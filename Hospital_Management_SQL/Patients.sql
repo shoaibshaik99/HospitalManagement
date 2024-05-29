@@ -9,7 +9,7 @@ Email varchar(50),
 ImageLink varchar(50),
 DOB DateTime,
 Age int,
-Gender varchar,
+Gender VARCHAR(10) NOT NULL,
 Contact_Address varchar(100),
 Issue varchar(50)
 )
