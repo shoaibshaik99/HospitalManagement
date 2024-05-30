@@ -18,5 +18,7 @@ namespace BusinessLayer.Interfaces
         public bool UpdatePatient(PatientModel patientModel);
 
         public bool DeletePatient(int patientId);
+
+        public LoginModel Login(LoginModel loginModel);
     }
 }

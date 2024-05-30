@@ -138,9 +138,20 @@ select * from Hospital.Patients
 --Drop Table Hospital.Patients;
 
 --Patient Login
-CREATE TABLE Hospital.Patients_Logins
+CREATE TABLE Hospital.Logins
 (
-	Patient_Id int primary key NOT NULL,
-	Username varchar(20) NOT NULL,
-	Pass_Key varchar(20) NOT NULL
+	Login_Id int primary key NOT NULL,
+	Email varchar(20) NOT NULL
 )
+
+CREATE PROCEDURE usp_LoginPatient
+    @Login_Id VARCHAR(50),
+    @Email VARCHAR(50)
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    SELECT Patient_Id, Email
+    FROM Hospital.Patients
+    WHERE Patient_Id = @Login_Id AND Email = @Email AND Is_Trash = 0;
+END

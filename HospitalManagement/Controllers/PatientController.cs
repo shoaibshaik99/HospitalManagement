@@ -109,5 +109,23 @@ namespace HospitalManagement.Controllers
                 return RedirectToAction("GetAllPatients");
             }
         }
+
+        [HttpGet]
+        public IActionResult Login()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Login(LoginModel loginModel)
+        {
+            LoginModel login = patientBusiness.Login(loginModel);
+            if (login == null)
+            {
+                return NotFound();
+            }
+            HttpContext.Session.SetInt32("PatientId", login.LoginId);
+            return RedirectToAction("GetpatientById", new { id = loginModel.LoginId});
+        }
     }
 }

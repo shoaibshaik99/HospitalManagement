@@ -148,5 +148,30 @@ namespace RepositoryLayer.Services
                 return true;
             }
         }
+
+        public LoginModel Login(LoginModel loginModel)
+        {
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                connection.Open();
+                SqlCommand loginCommand = new SqlCommand("usp_LoginPatient", connection);
+                loginCommand.CommandType = CommandType.StoredProcedure;
+
+                loginCommand.Parameters.AddWithValue("@Login_Id", loginModel.LoginId);
+                loginCommand.Parameters.AddWithValue("@Email", loginModel.Email);
+
+                using (SqlDataReader reader = loginCommand.ExecuteReader())
+                {
+                    if (reader.Read())
+                    {
+                        loginModel.LoginId = Convert.ToInt32(reader["Patient_Id"]);
+                        loginModel.Email = reader["Email"].ToString();
+                        return loginModel;
+                    }
+                }
+            }
+            return null;
+        }
+
     }
 }

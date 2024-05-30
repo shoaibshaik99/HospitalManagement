@@ -1,13 +1,13 @@
 ﻿@model ModelLayer.Models.AppointmentModel
-
+@using Microsoft.AspNetCore.Http
 @{
     ViewData["Title"] = "Create";
 }
 
 <h1>Create</h1>
 
-<h4>AppointmentModel</h4>
-<hr />
+<h4>Appointment</h4>
+<hr/>
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Create">
@@ -19,12 +19,12 @@
             </div> *@
             <div class="form-group">
                 <label asp-for="Patient_Id" class="control-label"></label>
-                <input asp-for="Patient_Id" class="form-control" />
+                <input asp-for="Patient_Id" class="form-control" value="@Context.Session.GetInt32("PatientId")" />
                 <span asp-validation-for="Patient_Id" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Doctor_Id" class="control-label"></label>
-                <input asp-for="Doctor_Id" class="form-control" />
+                <input asp-for="Doctor_Id" class="form-control" value="@Context.Session.GetInt32("DoctorId")" />
                 <span asp-validation-for="Doctor_Id" class="text-danger"></span>
             </div>
             @* <div class="form-group">

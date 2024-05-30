@@ -1,4 +1,5 @@
 ﻿using BusinessLayer.Interfaces;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using ModelLayer.Models;
 
@@ -43,7 +44,7 @@ namespace HospitalManagement.Controllers
         }
 
         [HttpGet]
-        [Route("Doctor/GetById/{doctorId}")]
+        //[Route("Doctor/GetById/{doctorId}")]
         public IActionResult GetDoctorById(int doctorId)
         {
             DoctorModel doctor = doctorBusiness.GetDoctorById(doctorId);
@@ -51,6 +52,7 @@ namespace HospitalManagement.Controllers
             {
                 return NotFound();
             }
+            HttpContext.Session.SetInt32("DoctorId",doctorId);
             return View(doctor);
         }
 

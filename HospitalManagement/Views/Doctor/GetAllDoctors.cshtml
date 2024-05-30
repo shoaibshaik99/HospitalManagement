@@ -3,20 +3,21 @@
 @{
     ViewData["Title"] = "GetAllDoctors";
 }
-<link rel="stylesheet" href="~/css/GetAll.css" asp-append-version="true" />
+@* <link rel="stylesheet" href="~/css/GetAll.css" asp-append-version="true" /> *@
+
 <h1>GetAllDoctors</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="CreateProfile">Create New</a>
 </p>
-<table class="table">
+<table class="table" border=" 2px solid black" align="center">
     <thead>
         <tr>
             <th>
                 @Html.DisplayNameFor(model => model.DoctorId)
             </th>
             @* <th>
-                @Html.DisplayNameFor(model => model.IsTrash)
+            @Html.DisplayNameFor(model => model.IsTrash)
             </th> *@
             <th>
                 @Html.DisplayNameFor(model => model.FirstName)
@@ -71,8 +72,8 @@
                     @Html.DisplayFor(modelItem => item.DoctorId)
                 </td>
                 @* <td>
-                    @Html.DisplayFor(modelItem => item.IsTrash)
-                </td> *@
+            @Html.DisplayFor(modelItem => item.IsTrash)
+            </td> *@
                 <td>
                     @Html.DisplayFor(modelItem => item.FirstName)
                 </td>
@@ -116,12 +117,20 @@
                     @Html.DisplayFor(modelItem => item.UpdatedAt)
                 </td>
                 <td>
-                    @Html.ActionLink("Edit", "UpdateDoctor", new { doctorId = item.DoctorId }) |
-                    @Html.ActionLink("Details", "GetDoctorById", new { doctorId = item.DoctorId }) |
-                    @* @Html.ActionLink("Details", "GetDoctorById", "Doctor", new { doctorId = item.DoctorId }, null) *@
-                    @Html.ActionLink("Delete", "DeleteDoctor", new { id = item.DoctorId })
+                    @if (@Context.Session.GetInt32("PaitentId") > 0)
+                    {
+                        @Html.ActionLink("Book Appointment", "GetDoctorById", new { doctorId = item.DoctorId })
+                    }
+                    else
+                    {
+                        @* @Html.ActionLink("Details", "GetDoctorById", "Doctor", new { doctorId = item.DoctorId }, null) <span> | </span>*@
+                        @Html.ActionLink("Details", "GetDoctorById", new { doctorId = item.DoctorId }) <span> | </span>
+                        @Html.ActionLink("Edit", "UpdateDoctor", new { doctorId = item.DoctorId }) <span> | </span>
+                        @Html.ActionLink("Delete", "DeleteDoctor", new { id = item.DoctorId })
+                    }
+
                 </td>
             </tr>
-        }   
+        }
     </tbody>
 </table>

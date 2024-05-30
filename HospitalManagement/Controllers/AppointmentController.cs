@@ -30,6 +30,7 @@ namespace HospitalManagement.Controllers
         [HttpPost]
         public IActionResult Create(AppointmentModel appointmentModel)
         {
+            
             bool isCreated = appointmentBusiness.CreateAppointment(appointmentModel);
             if (isCreated)
             {

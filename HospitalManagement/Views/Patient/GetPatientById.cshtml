@@ -75,7 +75,7 @@
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Contact_Address)
-        </dd>
+        </dd>   
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Concern)
         </dt>
@@ -97,6 +97,8 @@
     </dl>
 </div>
 <div>
+    <a asp-controller="Doctor" asp-action="GetAllDoctors" class=" btn btn-primary">Available Doctors</a>
     @Html.ActionLink("Edit", "UpdatePatient", new {  id=Model.Patient_Id }) |
     <a asp-action="GetAllPatients">Back to List</a>
 </div>
+
