@@ -136,3 +136,11 @@ EXEC usp_GetPatientById @Patient_Id = 1;
 select * from Hospital.Patients
 
 --Drop Table Hospital.Patients;
+
+--Patient Login
+CREATE TABLE Hospital.Patients_Logins
+(
+	Patient_Id int primary key NOT NULL,
+	Username varchar(20) NOT NULL,
+	Pass_Key varchar(20) NOT NULL
+)

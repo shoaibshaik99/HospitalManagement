@@ -1,0 +1,96 @@
+﻿@model ModelLayer.Models.AppointmentModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>AppointmentModel</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            @* <div class="form-group">
+                <label asp-for="Appointment_Id" class="control-label"></label>
+                <input asp-for="Appointment_Id" class="form-control" />
+                <span asp-validation-for="Appointment_Id" class="text-danger"></span>
+            </div> *@
+            <div class="form-group">
+                <label asp-for="Patient_Id" class="control-label"></label>
+                <input asp-for="Patient_Id" class="form-control" />
+                <span asp-validation-for="Patient_Id" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Doctor_Id" class="control-label"></label>
+                <input asp-for="Doctor_Id" class="form-control" />
+                <span asp-validation-for="Doctor_Id" class="text-danger"></span>
+            </div>
+            @* <div class="form-group">
+                <label asp-for="Appointment_Date" class="control-label"></label>
+                <input asp-for="Appointment_Date" class="form-control" />
+                <span asp-validation-for="Appointment_Date" class="text-danger"></span>
+            </div> *@
+            <div class="form-group">
+                <label asp-for="Appointment_Date" class="control-label"></label>
+                <input asp-for="Appointment_Date" class="form-control" type="date" min="@DateTime.Now.ToString("yyyy-MM-dd")" />
+                <span asp-validation-for="Appointment_Date" class="text-danger"></span>
+            </div>
+            @* <div class="form-group">
+                <label asp-for="Start_Time" class="control-label"></label>
+                <input asp-for="Start_Time" class="form-control" />
+                <span asp-validation-for="Start_Time" class="text-danger"></span>
+            </div> *@
+            <div class="form-group">
+                <label asp-for="Start_Time" class="control-label"></label>
+                <input asp-for="Start_Time" class="form-control" type="time" id="Start_Time" />
+                <span asp-validation-for="Start_Time" class="text-danger"></span>
+            </div>
+            @* <div class="form-group">
+                <label asp-for="End_Time" class="control-label"></label>
+                <input asp-for="End_Time" class="form-control" />
+                <span asp-validation-for="End_Time" class="text-danger"></span>
+            </div> *@
+            <div class="form-group">
+                <label asp-for="End_Time" class="control-label"></label>
+                <input asp-for="End_Time" class="form-control" type="time" id="End_Time" readonly />
+                <span asp-validation-for="End_Time" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Concerns" class="control-label"></label>
+                <input asp-for="Concerns" class="form-control" />
+                <span asp-validation-for="Concerns" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts
+{
+    <partial name="_ValidationScriptsPartial" />
+    <script>
+        document.getElementById("Start_Time").addEventListener("change", function () {
+            var startTime = this.value;
+            if (startTime) {
+                var timeParts = startTime.split(':');
+                var date = new Date();
+                date.setHours(timeParts[0]);
+                date.setMinutes(timeParts[1]);
+                date.setMinutes(date.getMinutes() + 20); // Add 20 minutes
+                
+                var hours = date.getHours().toString().padStart(2, '0');
+                var minutes = date.getMinutes().toString().padStart(2, '0');
+                
+                document.getElementById("End_Time").value = `${hours}:${minutes}`;
+            }
+        });
+    </script>
+}

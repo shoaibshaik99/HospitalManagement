@@ -17,6 +17,8 @@ namespace HospitalManagement
             builder.Services.AddTransient<IDoctorBusiness, DoctorBusiness>();
             builder.Services.AddTransient<IPatientRepo, PatientRepo>();
             builder.Services.AddTransient<IPatientBusiness, PatientBusiness>();
+            builder.Services.AddTransient<IAppointmentRepo, AppointmentRepo>();
+            builder.Services.AddTransient<IAppointmentBusiness, AppointmentBusiness>();
 
             var app = builder.Build();
 
