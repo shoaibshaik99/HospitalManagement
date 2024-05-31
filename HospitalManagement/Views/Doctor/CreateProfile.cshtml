@@ -89,11 +89,13 @@
                 <span asp-validation-for="Qualification" class="text-danger"></span>
             </div>
             <br>
+
             <div class="form-group">
                 <label asp-for="Specialization" class="control-label">Specialization</label>
-                <input asp-for="Specialization" class="form-control" />
+                <select asp-for="Specialization" class="form-control" asp-items="ViewBag.Specializations"></select>
                 <span asp-validation-for="Specialization" class="text-danger"></span>
             </div>
+
             <br>
             <div class="form-group">
                 <label asp-for="YearsOfExperience" class="control-label">Years of Experience</label>
@@ -121,7 +123,7 @@
 </div>
 </div>
 
-<div>
+<div>   
     <a asp-action="Index">Back to List</a>
 </div>
 

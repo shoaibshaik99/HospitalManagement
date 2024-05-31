@@ -1,6 +1,7 @@
 ﻿using BusinessLayer.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using ModelLayer.Models;
 
 namespace HospitalManagement.Controllers
@@ -22,6 +23,8 @@ namespace HospitalManagement.Controllers
         [HttpGet]
         public IActionResult CreateProfile()
         {
+            var specializations = GetSpecializations();
+            ViewBag.Specializations = new SelectList(specializations);
             return View();
         }
 
@@ -33,7 +36,15 @@ namespace HospitalManagement.Controllers
             {
                 return RedirectToAction("CreateProfile");
             }
+            var specializations = GetSpecializations();
+            ViewBag.Specializations = new SelectList(specializations);
             return View("Index");
+        }
+
+        private List<string> GetSpecializations()
+        {
+            // This should be replaced with actual data fetching logic, e.g. from a database or an enum
+            return new List<string> { "","Cardiology", "Dermatology", "Neurology", "Pediatrics", "Psychiatry" };
         }
 
         [HttpGet]
