@@ -42,5 +42,10 @@ namespace BusinessLayer.Services
         {
             return doctorRepo.DeleteDoctor(doctorId);
         }
+
+        public List<GetMyPatientDetails> GetMyPatientDetails(int doctorId)
+        {
+            return doctorRepo.GetMyPatientDetails(doctorId);
+        }
     }
 }

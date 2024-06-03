@@ -1,4 +1,5 @@
 ﻿using BusinessLayer.Interfaces;
+using BusinessLayer.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -126,6 +127,17 @@ namespace HospitalManagement.Controllers
             }
         }
 
+        [HttpGet]
+        [Route("Doctor/GetMyPatientDetails/{doctorId}")]
+        public IActionResult GetMyPatientDetails(int doctorId)
+        {
+            List<GetMyPatientDetails> myPatientDetails = doctorBusiness.GetMyPatientDetails(doctorId);
+            if (myPatientDetails == null || myPatientDetails.Count == 0)
+            {
+                return NotFound();
+            }
 
+            return View(myPatientDetails);
+        }
     }
 }

@@ -189,21 +189,52 @@ namespace RepositoryLayer.Services
             }
 
             return false;
-            }
-
-            public bool DeleteDoctor(int doctorId)
-            {
-                if (connection != null)
-                {
-                    connection.Open();
-                    SqlCommand deleteCommand = new SqlCommand("usp_DeleteDoctor", connection);
-                    deleteCommand.CommandType = CommandType.StoredProcedure;
-                    deleteCommand.Parameters.AddWithValue("@DoctorId", doctorId);
-                    deleteCommand.ExecuteNonQuery();
-                    connection.Close();
-                    return true;
-                }
-                return false;
-            }
         }
+
+        public bool DeleteDoctor(int doctorId)
+        {
+            if (connection != null)
+            {
+                connection.Open();
+                SqlCommand deleteCommand = new SqlCommand("usp_DeleteDoctor", connection);
+                deleteCommand.CommandType = CommandType.StoredProcedure;
+                deleteCommand.Parameters.AddWithValue("@DoctorId", doctorId);
+                deleteCommand.ExecuteNonQuery();
+                connection.Close();
+                return true;
+            }
+            return false;
+        }
+
+        public List<GetMyPatientDetails> GetMyPatientDetails(int doctorId)
+        {
+            List<GetMyPatientDetails> myPatientDetails = new List<GetMyPatientDetails>();
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+                SqlCommand command = new SqlCommand("usp_GetMyPatientsDetails", connection);
+                command.CommandType = CommandType.StoredProcedure;
+                command.Parameters.AddWithValue("@DoctorID", doctorId);
+                SqlDataReader reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    GetMyPatientDetails detail = new GetMyPatientDetails
+                    {
+                        DoctorID = Convert.ToInt32(reader["DoctorID"]),
+                        DoctorName = reader["Doctor Name"].ToString(),
+                        DoctorImage = reader["Doctor Image"].ToString(),
+                        PatientID = Convert.ToInt32(reader["Patient_Id"]),
+                        PatientName = reader["Patient Name"].ToString(),
+                        PatientImage = reader["Patient Image"].ToString(),
+                        PatientGender = reader["Patient Gender"].ToString(),
+                        PatientAge = Convert.ToInt32(reader["Patient Age"]),
+                        Concerns = reader["Concerns"].ToString()
+                    };
+                    myPatientDetails.Add(detail);
+                }
+            }
+            return myPatientDetails;
+        }
+
     }
+}

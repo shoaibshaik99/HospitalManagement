@@ -1,7 +1,11 @@
-﻿
-@{
+﻿@{
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>Doctors</h1>
 
+<div class="mt-4">
+    <a class="btn btn-primary" asp-controller="Doctor" asp-action="CreateProfile">Create Doctor Profile</a>
+    <a class="btn btn-secondary" asp-controller="Doctor" asp-action="GetAllDoctors">View All Doctors</a>
+    <a class="btn btn-secondary" asp-controller="Doctor" asp-action="GetMyPatientDetails">Get My Patient Details</a>
+</div>

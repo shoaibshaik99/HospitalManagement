@@ -19,12 +19,12 @@
             </div> *@
             <div class="form-group">
                 <label asp-for="Patient_Id" class="control-label"></label>
-                <input asp-for="Patient_Id" class="form-control" value="@Context.Session.GetInt32("PatientId")" readonly />
+                <input asp-for="Patient_Id" class="form-control" value="@Context.Session.GetInt32("PatientId")"/>
                 <span asp-validation-for="Patient_Id" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Doctor_Id" class="control-label"></label>
-                <input asp-for="Doctor_Id" class="form-control" value="@Context.Session.GetInt32("DoctorId")" readonly/>
+                <input asp-for="Doctor_Id" class="form-control" value="@Context.Session.GetInt32("DoctorId")"/>
                 <span asp-validation-for="Doctor_Id" class="text-danger"></span>
             </div>
             @* <div class="form-group">
@@ -34,7 +34,7 @@
             </div> *@
             <div class="form-group">
                 <label asp-for="Appointment_Date" class="control-label"></label>
-                <input asp-for="Appointment_Date" class="form-control" type="date" min="@DateTime.Now.ToString("yyyy-MM-dd")" />
+                <input asp-for="Appointment_Date" class="form-control" type="date" />
                 <span asp-validation-for="Appointment_Date" class="text-danger"></span>
             </div>
             @* <div class="form-group">
@@ -94,3 +94,4 @@
         });
     </script>
 }
+

@@ -83,7 +83,8 @@
                     @Html.DisplayFor(modelItem => item.ImageLink)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.DOB)
+                    @* @Html.DisplayFor(modelItem => item.DOB) *@
+                    @item.DOB.ToString("d")
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Age)

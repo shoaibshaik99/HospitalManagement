@@ -5,6 +5,7 @@ using System.Data;
 using System.Data.SqlClient;
 using ModelLayer.Models;
 using RepositoryLayer.Interfaces;
+using System.Dynamic;
 
 namespace RepositoryLayer.Services
 {
@@ -171,6 +172,37 @@ namespace RepositoryLayer.Services
                 }
             }
             return null;
+        }
+
+        public List<GetMyDoctorDetails> GetMyDoctorDetails(int PatientId)
+        {
+            List<GetMyDoctorDetails> myDoctorDetails = new List<GetMyDoctorDetails>();
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                connection.Open();
+                SqlCommand command = new SqlCommand("usp_GetMyDoctorDetails", connection);
+                command.CommandType = CommandType.StoredProcedure;
+                command.Parameters.AddWithValue("@Patient_Id", PatientId);
+                SqlDataReader reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    GetMyDoctorDetails details = new GetMyDoctorDetails
+                    {
+                        PatientID = Convert.ToInt32(reader["Patient ID"]),
+                        PatientName = reader["Patient Name"].ToString(),
+                        DoctorID = Convert.ToInt32(reader["DoctorID"]),
+                        DoctorName = reader["Doctor Name"].ToString(),
+                        DoctorImage = reader["Doctor Image"].ToString(),
+                        DoctorAge = Convert.ToInt32(reader["Doctor Age"]),
+                        DoctorGender = reader["Gender"].ToString(),
+                        Qualification = reader["Qualification"].ToString(),
+                        Specialization = reader["Specialization"].ToString(),
+                        YearsOfExperience = Convert.ToInt32(reader["Years_Of_Experience"])
+                    };
+                    myDoctorDetails.Add(details);
+                }
+            }
+            return myDoctorDetails;
         }
 
     }

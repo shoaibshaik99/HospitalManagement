@@ -3,5 +3,9 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>Patients</h1>
 
+<div class="mt-4">
+    <a class="btn btn-primary" asp-controller="Patient" asp-action="CreateProfile">Create Patient Profile</a>
+    <a class="btn btn-secondary" asp-controller="Patient" asp-action="GetAllPatients">View All Patients</a>
+</div>

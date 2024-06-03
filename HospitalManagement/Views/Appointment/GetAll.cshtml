@@ -37,35 +37,39 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Appointment_Id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Patient_Id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Doctor_Id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Appointment_Date)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Start_Time)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.End_Time)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Concerns)
-            </td>
-            @* <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Appointment_Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Patient_Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Doctor_Id)
+                </td>
+                <td>
+                    @* @Html.DisplayFor(modelItem => item.Appointment_Date) *@
+                    @item.Appointment_Date.ToString("d")
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Start_Time)
+                    @* @item.Start_Time.ToString("t") *@
+                </td>
+                <td>
+                    @* @Html.DisplayFor(modelItem => item.End_Time) *@
+                    @item.Start_Time.ToString("t")
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Concerns)
+                </td>
+                @* <td>
+            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
             </td> *@
-        </tr>
-}
+            </tr>
+        }
     </tbody>
 </table>

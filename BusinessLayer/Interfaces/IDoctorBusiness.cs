@@ -18,5 +18,7 @@ namespace BusinessLayer.Interfaces
         public bool UpdateDoctor(DoctorModel doctorModel);
 
         public bool DeleteDoctor(int doctorId);
+
+        public List<GetMyPatientDetails> GetMyPatientDetails(int doctorId);
     }
 }

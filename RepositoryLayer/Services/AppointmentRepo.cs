@@ -80,6 +80,7 @@ namespace RepositoryLayer.Services
                 while (reader.Read())
                 {
                     AppointmentModel model = new AppointmentModel();
+                    model.Appointment_Id = Convert.ToInt32(reader["Appointment_Id"]);
                     model.Patient_Id = Convert.ToInt32(reader["Patient_Id"]);
                     model.Doctor_Id = Convert.ToInt32(reader["Doctor_Id"]);
                     model.Appointment_Date = Convert.ToDateTime(reader["Appointment_Date"]);

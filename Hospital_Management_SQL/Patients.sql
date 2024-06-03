@@ -144,12 +144,12 @@ CREATE TABLE Hospital.Logins
 	Email varchar(20) NOT NULL
 )
 
-CREATE PROCEDURE usp_LoginPatient
+ALTER PROCEDURE usp_LoginPatient
     @Login_Id VARCHAR(50),
     @Email VARCHAR(50)
 AS
 BEGIN
-    SET NOCOUNT ON;
+    --SET NOCOUNT ON;
 
     SELECT Patient_Id, Email
     FROM Hospital.Patients
